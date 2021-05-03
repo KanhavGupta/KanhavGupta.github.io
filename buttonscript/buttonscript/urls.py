@@ -20,8 +20,9 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('#text/', views.external_text),
-    path('output', views.output, name='script'),
-    path('external-text/', views.external_text),
-    path('external-audio/', views.external_audio)
+    path('buttonscript/templates',views.button),
+    path('buttonscript/templates/output', views.output, name='script'),
+    path('buttonscript/templates/external-text/', views.external_text),
+    path('buttonscript/templates/external-audio/', views.external_audio)
 
 ]
