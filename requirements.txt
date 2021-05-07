@@ -1,7 +1,7 @@
-tensorflow
+python==3.6
+tensorflow==1.15
 pandas
 numpy
-pickle
 sklearn
 opencv-python
 librosa
