@@ -6,7 +6,7 @@ from train_text import filename_imdb
 def custom_text_check(input_text):
     transformer = TfidfTransformer()
     loaded_vec = CountVectorizer(decode_error="replace",
-                                 vocabulary=pickle.load(open("G:/NIT/1.PROJECT WORK NIT/SentimentAnalysisWebApp/models/feature.pkl", "rb")))
+                                 vocabulary=pickle.load(open("feature.pkl", "rb")))
     loaded_model = pickle.load(open(filename_imdb, 'rb'))
 
     test = []
@@ -21,7 +21,7 @@ def main():
     # Custom Test: Test a review on the best performing model (Logistic Regression)
     transformer = TfidfTransformer()
     loaded_vec = CountVectorizer(decode_error="replace",
-                                 vocabulary=pickle.load(open("G:/NIT/1.PROJECT WORK NIT/SentimentAnalysisWebApp/models/feature.pkl", "rb")))
+                                 vocabulary=pickle.load(open("/models/feature.pkl", "rb")))
     loaded_model = pickle.load(open(filename_imdb, 'rb'))
 
     print('\nTest a custom review message')

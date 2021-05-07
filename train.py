@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
-filename = 'G:/NIT/1.PROJECT WORK NIT/SentimentAnalysisWebApp/models/finalized_model.sav'
+filename = 'finalized_model.sav'
 
 
 # DataFlair - Extract features (mfcc, chroma, mel) from a sound file

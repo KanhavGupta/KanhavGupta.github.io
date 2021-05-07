@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<!-- Bootstrap CSS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="static/style.css">
+	<link rel="stylesheet" href="static/style1.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<title>Sentiment Analysis</title>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
+		<a class="navbar-brand" href="#">Sentiment Analysis</a>
+		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto" style="font-size: 17px;">
+				<li class="nav-item">
+					<a class="nav-link" href="#home">Home
+						<!-- <span class="sr-only">(current)</span> -->
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#text">Text</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#audio">Audio</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#image">Image</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div id="home" style="height: 80px;"></div>
+
+	<div style="min-height: 600px;">
+		<h3 class="text-center">Welcome</h3>
+		<h4 class="text-center">To the world of Sentiment Analysis</h4>
+		<p class="text-center" style="margin: 30px;">Sentiment analysis, in the past few years has grown in terms of its
+			reach. In the beginning, it mainly focused on the analysis of textual inputs, looking forward to expanding
+			its boundaries. Over time, there have been advancements in other modalities of data as well, that include
+			audio and visual data. Globally, the researchers have been showing keen interest in this regard and are
+			coming up with different techniques to accomplish this task. In this paper, we have explained various
+			methods that are widely being used for sentiment analysis. Here, we have studied some of the approaches used
+			by various authors in their experiments. We have also explored different applications where sentiment
+			analysis is currently being used, for example, monitoring social media sites such as Twitter, managing
+			customer response and predicting election results.</p>
+		<center>
+			<img src="https://1.bp.blogspot.com/-1JSAMY1SqBM/YI6nWOb-i_I/AAAAAAAAiJU/Sw5JmgKl-WkcvxyQ89IETR2A61PpIiAPQCLcBGAsYHQ/s320/123.jpeg"
+				height="300" width="400" class="img-fluid" alt="Responsive image">
+		</center>
+	</div>
+
+	<div id="text" style="height: 80px;"></div>
+
+	<div class="row">
+		<div class="col-6 ">
+			<div style="height: 200px; margin-left: 30px;">
+				<h4 class="text-left">Text Sentiment Analysis</h4>
+				<div class="form-signup">
+					<form name="form1" action="{{url_for('textData', _anchor='text')}}" method="post">
+						<label>
+							<h5>Input Text:</h5>
+							<input class="text-input" type="text" name="param"
+								placeholder="Enter Text for Sentiment Analysis">
+						</label>
+						<br><br>
+						<input type="submit" name="check1" value="Check Sentiment">
+						<!-- <button type="submit" name="submit">Check Sentiment</button> -->
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-6 text-center">
+			<h4 id="result" class="text-center" style="margin-top: 80px;">Result:</h4>
+			<h5>
+				{%if data%}
+				{{data}}
+
+				{%endif%}
+			</h5>
+		</div>
+	</div>
+
+
+	<div id="audio" style="height: 80px;"></div>
+
+	<div class="row">
+		<div class="col-6 ">
+			<div style="height: 200px; margin-left: 30px;">
+				<h4 class="text-left">Audio Sentiment Analysis</h4>
+				<div class="form-signup">
+					<form name="form2" action="{{url_for('audioData', _anchor='audio')}}" method="post"
+						enctype="multipart/form-data">
+						<label>
+							<h5>Choose an Audio</h5>
+							<input class="audio-input" type="file" id="avatar" name="avatar"
+								accept="audio/wav, audio/mpeg">
+						</label>
+						<br><br>
+						<input type="submit" class="check2" value="Check Sentiment">
+						<!-- <button type="submit" name="submit">Check Sentiment</button> -->
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-6 text-center">
+			<h4 id="result" class="text-center" style="margin-top: 80px;">Result:</h4>
+			<h5>
+				{%if data1%}
+				{{ data1 }}
+				{%endif%}
+			</h5>
+		</div>
+	</div>
+
+	<div id="image" style="height: 80px;"></div>
+
+	<div class="row">
+		<div class="col-6 ">
+			<div style="height: 450px; margin-left: 30px;">
+				<h4 class="text-left">Image Sentiment Analysis</h4>
+				<div class="form-signup">
+					<form name="form3" action="{{url_for('imageData', _anchor='image')}}" method="post"
+						enctype="multipart/form-data">
+						<label>
+							<h5>Choose an Image</h5>
+							{%if data2 == NULL%}
+							<input class="image-input" type="file" id="avatar1" name="avatar1" accept="image/jpg">
+							{%else%}
+							<input class="image-input" type="file" id="avatar1" name="avatar1" accept="image/jpg"
+								disabled>
+							{%endif%}
+
+						</label>
+						<br><br>
+						<input type="submit" class="check3" value="Check Sentiment">
+						<p>
+							{% with messages = get_flashed_messages() %}
+							{% if messages %}
+						<ul>
+							{% for message in messages %}
+							<li>{{ message }}</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+						{% endwith %}
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-6 text-center">
+			<h4 id="result" class="text-center" style="margin-top: 80px;">Result:</h4>
+			<h5>
+				{%if data2 != NULL%}
+				<a href="{{ url_for('display1_image') }}"><img src="{{ url_for('display1_image') }}" class="img-fluid"
+						alt="Responsive Image"></a>
+				{%endif%}
+			</h5>
+		</div>
+	</div>
+
+
+	<div style="height: 80px;"></div>
+	<footer class="footer fixed-bottom" style="height: auto; padding: 10px; font-size: 20px;">
+		<p>Designed with ❤️ By Kanhav, Shubhangi and Anamika</p>
+	</footer>
+
+</body>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+
+	.navbar {
+		-webkit-box-shadow: 0 8px 6px -6px #222;
+		-moz-box-shadow: 0 8px 6px -6px #222;
+		box-shadow: 0 8px 6px -6px #222;
+	}
+
+	.navbar-brand {
+		font-family: 'Alata';
+		font-size: 1.8em !important;
+		color: white !important;
+	}
+
+	/* Google Fonts */
+	@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+
+	/* Navbar Title */
+	.navbar-brand {
+		font-family: 'Alata';
+		font-size: 1.8em !important;
+		color: white !important;
+	}
+
+	.warning-section {
+		display: flex;
+		line-height: 2rem;
+		justify-content: center;
+		align-items: center;
+		background-color: crimson;
+	}
+
+	.warning {
+		font-family: 'Nunito';
+		font-weight: 700;
+		margin-bottom: 0;
+	}
+
+	/* Shadow effect for navbar */
+	.navbar {
+		-webkit-box-shadow: 0 8px 6px -6px #222;
+		-moz-box-shadow: 0 8px 6px -6px #222;
+		box-shadow: 0 8px 6px -6px #222;
+	}
+
+	/* Clock and next class name */
+	.main {
+		font-family: 'Nunito', sans-serif;
+		font-size: 40px;
+		background-color: #1f1f1f;
+		color: #999797;
+		height: 40%;
+		padding: 50px;
+	}
+
+	.className,
+	.classNameOne {
+		font-size: 80px;
+		padding-bottom: 10px;
+	}
+
+	.tableHead {
+		font-size: 20px;
+	}
+
+	.info {
+		font-family: sans-serif;
+		margin-top: -20px;
+		padding: 15px;
+		padding-bottom: 2px;
+	}
+
+	.footer-text {
+		font-family: 'Nunito', sans-serif;
+		color: white;
+		font-size: 18px;
+	}
+
+	footer a:hover {
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	@media only screen and (max-width: 768px) {
+		.main {
+			font-size: 24px;
+			height: 50%;
+			padding: 20px;
+		}
+
+		.className,
+		.classNameOne {
+			font-size: 20px;
+		}
+
+		.col-12 {
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+	}
+
+	.col {
+		padding-right: 10px !important;
+		padding-left: 10px !important;
+	}
+
+	.section-header {
+		font-size: 30px;
+		background-color: #1f1f1f;
+		color: white;
+	}
+
+	.section-left {
+		border-right: 1px dashed #333;
+	}
+
+	th,
+	td {
+		vertical-align: middle !important;
+		text-align: center !important;
+	}
+
+	.today-time-table .table {
+		margin-bottom: 0 !important;
+	}
+
+	.today-time-table {
+		padding-bottom: 10px;
+	}
+
+	.faculties {
+		padding-bottom: 10px;
+	}
+
+	table caption {
+		caption-side: top;
+		font-size: 25px;
+		color: white;
+	}
+
+	.footer {
+		height: 40px;
+		width: 100%;
+		background-color: #1f1f1f;
+		color: white;
+		font-size: 22px;
+		text-align: center;
+	}
+
+	.footer p {
+		margin-bottom: 0;
+	}
+
+	@media screen and (max-width: 400px) {
+		.footer {
+			font-size: 18px;
+		}
+	}
+
+	.linkSection {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 20vh;
+	}
+
+	.btnTimeTable {
+		background-color: #5bc0de;
+		color: #1f1f1f;
+		font-weight: 600;
+		padding: 1em 1.5em;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	.btnTimeTable:hover {
+		color: #1f1f1f;
+		background-color: #3db9df;
+		text-decoration: none;
+	}
+
+	.form-signup {
+		/*width: 330px;*/
+		min-height: 400px;
+		margin-top: 50px;
+	}
+
+	.form-signup a {
+		text-decoration: none;
+		font-size: 14px;
+		margin-bottom: 20px;
+	}
+
+	.form-signup label {
+		margin-top: 0;
+		display: block;
+	}
+
+	.text-input {
+		border: none;
+		border-bottom: 2px solid #378cc0;
+		/*background: none;*/
+		float: left;
+		/*margin-right: 5px;*/
+	}
+
+	.image-input {
+		border: none;
+		/* border-bottom: 2px solid #378cc0; */
+		/*background: none;*/
+		float: left;
+		/*margin-right: 5px;*/
+	}
+
+	.audio-input {
+		border: none;
+		/* border-bottom: 2px solid #378cc0; */
+		/*background: none;*/
+		float: left;
+		/*margin-right: 5px;*/
+	}
+
+	.form-signup button {
+		border: none;
+		background: green;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 0px;
+		cursor: pointer;
+		padding: 5px 12px;
+		float: left;
+		margin-top: 10px;
+		display: block;
+		margin-right: 13px;
+	}
+
+	.form-signup textarea {
+		border: none;
+		border: 2px solid #378cc0;
+		background: #378cc0;
+		color: darkgreen;
+		float: left;
+		margin-right: 12px;
+	}
+
+	.form-signup input[type=submit] {
+		border: none;
+		background: green;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 0px;
+		cursor: pointer;
+		padding: 5px 12px;
+		float: left;
+		margin-top: 10px;
+		display: block;
+		margin-right: 13px;
+	}
+
+	.form-signup input[type=reset] {
+		border: none;
+		background: green;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 0px;
+		cursor: pointer;
+		padding: 5px 12px;
+		float: right;
+		margin-top: 10px;
+		display: block;
+		margin-right: 10px;
+	}
+
+	.form-signup p {
+		display: block;
+		margin-top: 90px;
+		margin-right: -130px;
+		text-align: center;
+		color: red;
+		transition: .300ms ease-in-out all;
+		font-size: 14px;
+	}
+</style>
+
+</html>

@@ -1,5 +1,5 @@
 .form-signup {
-	width: 330px;
+	/*width: 330px;*/
 	min-height: 400px;
 	margin-top: 50px;
 }
@@ -12,19 +12,33 @@
 	margin-top: 0;
 	display: block;
 }
-.form-signup textarea {
-	width: 300px;
-	border: 2px solid #758cc2;
-    background: white;
-	float: left;
-	/*margin-right: 5px;*/
-}
-.form-signup input {
+.text-input {
 	border: none;
 	border-bottom: 2px solid #378cc0;
 	/*background: none;*/
 	float: left;
 	/*margin-right: 5px;*/
+}
+
+.audio-input {
+	border: none;
+	/* border-bottom: 2px solid #378cc0; */
+	/*background: none;*/
+	float: left;
+	/*margin-right: 5px;*/
+}
+.form-signup button {
+	border: none;
+	background: green;
+	color: #fff;
+	font-weight: bold;
+	border-radius: 0px;
+	cursor: pointer;
+	padding: 5px 12px;
+	float: left;
+	margin-top: 10px;
+	display: block;
+	margin-right: 13px;
 }
 .form-signup textarea {
 	border: none;
@@ -69,3 +83,4 @@
 	transition: .300ms ease-in-out all;
 	font-size: 14px;
 }
+
