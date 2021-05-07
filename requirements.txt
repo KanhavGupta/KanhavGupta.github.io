@@ -1,5 +1,4 @@
-python==3.6
-tensorflow==1.15
+tensorflow
 pandas
 numpy
 sklearn
