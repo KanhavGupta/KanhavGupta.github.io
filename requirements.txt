@@ -1,7 +1,6 @@
 tensorflow
 pandas
 numpy
-pickle
 sklearn
 opencv-python
 librosa
