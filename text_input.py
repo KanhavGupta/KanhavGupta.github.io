@@ -1,6 +1,5 @@
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from train_text import filename_imdb
 
 filename_imdb = 'finalized_model_imdb.sav'
 
