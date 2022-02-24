@@ -27,10 +27,10 @@
 
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
 
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
-		<a class="navbar-brand" href="#">Sentiment Analysis</a>
+		<a class="navbar-brand" href="{{url_for('man')}}">Sentiment Analysis</a>
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 			aria-label="Toggle navigation">
@@ -45,13 +45,13 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#text">Text</a>
+					<a class="nav-link" href="{{url_for('man', _anchor='text')}}">Text</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#audio">Audio</a>
+					<a class="nav-link" href="{{url_for('man', _anchor='audio')}}">Audio</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#image">Image</a>
+					<a class="nav-link" href="{{url_for('man', _anchor='image')}}">Image</a>
 				</li>
 			</ul>
 		</div>
@@ -77,7 +77,7 @@
 	</div>
 
 	<div id="text" style="height: 80px;"></div>
-
+	<hr style="height:1px;border:none;color:#333;background-color:#333; margin-left: 30px; margin-right: 30px;">
 	<div class="row">
 		<div class="col-6 ">
 			<div style="height: 200px; margin-left: 30px;">
@@ -86,7 +86,7 @@
 					<form name="form1" action="{{url_for('textData', _anchor='text')}}" method="post">
 						<label>
 							<h5>Input Text:</h5>
-							<input class="text-input" type="text" name="param"
+							<input class="text-input" type="text" name="param" required
 								placeholder="Enter Text for Sentiment Analysis">
 						</label>
 						<br><br>
@@ -97,8 +97,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6 text-center">
-			<h4 id="result" class="text-center" style="margin-top: 80px;">Result:</h4>
+		<div class="col-4 text-center">
+			<h4 id="result" class="text-center" style="margin-top: 40px;">Result:</h4>
 			<h5>
 				{%if data%}
 				{{data}}
@@ -110,7 +110,7 @@
 
 
 	<div id="audio" style="height: 80px;"></div>
-
+	<hr style="height:1px;border:none;color:#333;background-color:#333;margin-left: 30px; margin-right: 30px;">
 	<div class="row">
 		<div class="col-6 ">
 			<div style="height: 200px; margin-left: 30px;">
@@ -120,7 +120,7 @@
 						enctype="multipart/form-data">
 						<label>
 							<h5>Choose an Audio</h5>
-							<input class="audio-input" type="file" id="avatar" name="avatar"
+							<input class="audio-input" required type="file" id="avatar" name="avatar"
 								accept="audio/wav, audio/mpeg">
 						</label>
 						<br><br>
@@ -130,21 +130,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6 text-center">
-			<h4 id="result" class="text-center" style="margin-top: 80px;">Result:</h4>
+		<div class="col-4 text-center">
+			<h4 id="result" class="text-center" style="margin-top: 40px;">Result:</h4>
 			<h5>
 				{%if data1%}
 				{{ data1 }}
+
 				{%endif%}
 			</h5>
 		</div>
 	</div>
 
 	<div id="image" style="height: 80px;"></div>
-
+	<hr style="height:1px;border:none;color:#333;background-color:#333;margin-left: 30px; margin-right: 30px;">
 	<div class="row">
 		<div class="col-6 ">
-			<div style="height: 450px; margin-left: 30px;">
+			<div style="height: 470px; margin-left: 30px;">
 				<h4 class="text-left">Image Sentiment Analysis</h4>
 				<div class="form-signup">
 					<form name="form3" action="{{url_for('imageData', _anchor='image')}}" method="post"
@@ -152,7 +153,8 @@
 						<label>
 							<h5>Choose an Image</h5>
 							{%if data2 == NULL%}
-							<input class="image-input" type="file" id="avatar1" name="avatar1" accept="image/jpg">
+							<input class="image-input" required type="file" id="avatar1" name="avatar1"
+								accept="image/jpg">
 							{%else%}
 							<input class="image-input" type="file" id="avatar1" name="avatar1" accept="image/jpg"
 								disabled>
@@ -160,28 +162,24 @@
 
 						</label>
 						<br><br>
+						{%if data2 == NULL%}
 						<input type="submit" class="check3" value="Check Sentiment">
-						<p>
-							{% with messages = get_flashed_messages() %}
-							{% if messages %}
-						<ul>
-							{% for message in messages %}
-							<li>{{ message }}</li>
-							{% endfor %}
-						</ul>
-						{% endif %}
-						{% endwith %}
-						</p>
+						{%else%}
+						<input type="submit" class="check3" value="Check Sentiment" disabled>
+						{%endif%}
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="col-6 text-center">
-			<h4 id="result" class="text-center" style="margin-top: 80px;">Result:</h4>
+		<div class="col-4 text-center">
+			<h4 id="result" class="text-center" style="margin-top: 40px;">Result:</h4>
 			<h5>
-				{%if data2 != NULL%}
-				<a href="{{ url_for('display1_image') }}"><img src="{{ url_for('display1_image') }}" class="img-fluid"
-						alt="Responsive Image"></a>
+				{%if data2 == 'no'%}
+				<p>No Faces Detected</p>
+				{%elif data2 != NULL%}
+				<a href="{{ url_for('display1_image') }}" target="_blank"><img src="{{ url_for('display1_image') }}"
+						class="img-fluid" alt="Responsive Image"></a>
+
 				{%endif%}
 			</h5>
 		</div>
@@ -221,19 +219,6 @@
 		color: white !important;
 	}
 
-	.warning-section {
-		display: flex;
-		line-height: 2rem;
-		justify-content: center;
-		align-items: center;
-		background-color: crimson;
-	}
-
-	.warning {
-		font-family: 'Nunito';
-		font-weight: 700;
-		margin-bottom: 0;
-	}
 
 	/* Shadow effect for navbar */
 	.navbar {
@@ -250,23 +235,6 @@
 		color: #999797;
 		height: 40%;
 		padding: 50px;
-	}
-
-	.className,
-	.classNameOne {
-		font-size: 80px;
-		padding-bottom: 10px;
-	}
-
-	.tableHead {
-		font-size: 20px;
-	}
-
-	.info {
-		font-family: sans-serif;
-		margin-top: -20px;
-		padding: 15px;
-		padding-bottom: 2px;
 	}
 
 	.footer-text {
@@ -287,11 +255,6 @@
 			padding: 20px;
 		}
 
-		.className,
-		.classNameOne {
-			font-size: 20px;
-		}
-
 		.col-12 {
 			padding-left: 0 !important;
 			padding-right: 0 !important;
@@ -303,39 +266,6 @@
 		padding-left: 10px !important;
 	}
 
-	.section-header {
-		font-size: 30px;
-		background-color: #1f1f1f;
-		color: white;
-	}
-
-	.section-left {
-		border-right: 1px dashed #333;
-	}
-
-	th,
-	td {
-		vertical-align: middle !important;
-		text-align: center !important;
-	}
-
-	.today-time-table .table {
-		margin-bottom: 0 !important;
-	}
-
-	.today-time-table {
-		padding-bottom: 10px;
-	}
-
-	.faculties {
-		padding-bottom: 10px;
-	}
-
-	table caption {
-		caption-side: top;
-		font-size: 25px;
-		color: white;
-	}
 
 	.footer {
 		height: 40px;
@@ -354,28 +284,6 @@
 		.footer {
 			font-size: 18px;
 		}
-	}
-
-	.linkSection {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 20vh;
-	}
-
-	.btnTimeTable {
-		background-color: #5bc0de;
-		color: #1f1f1f;
-		font-weight: 600;
-		padding: 1em 1.5em;
-		text-decoration: none;
-		text-transform: uppercase;
-	}
-
-	.btnTimeTable:hover {
-		color: #1f1f1f;
-		background-color: #3db9df;
-		text-decoration: none;
 	}
 
 	.form-signup {
@@ -444,7 +352,7 @@
 
 	.form-signup input[type=submit] {
 		border: none;
-		background: green;
+		background: rgb(61, 117, 163);
 		color: #fff;
 		font-weight: bold;
 		border-radius: 0px;

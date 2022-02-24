@@ -1,11 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from text_input import custom_text_check
 from emotion_detection import custom_audio_check
-from model import test_one_file
+from ImageSA import test_one_file
 import os
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+
+app = Flask(__name__, template_folder='', static_folder='static')
 
 UPLOAD_FOLDER = "static/images"
 app.secret_key = "secret key"
@@ -28,35 +29,34 @@ def textData():
 @app.route('/audio/', methods=['POST', 'GET'])
 def audioData():
     audio = request.files['avatar']
-    audio.save(secure_filename(audio.filename))
+    audio.save(secure_filename("voice.wav"))
     print(audio.filename)
     result = custom_audio_check()
-    os.remove(audio.filename)
     result = audio.filename + ": " + result
+    os.remove("voice.wav")
     return render_template("index.html", data1=result)
 
 
-@app.route('/image/', methods=['POST', 'GET'])
+@ app.route('/image/', methods=['POST', 'GET'])
 def imageData():
     if os.path.exists("static/images/detected1.jpg"):
         os.remove("static/images/detected1.jpg")
     image = request.files['avatar1']
-    if image.filename == '':
-        flash('No image selected for uploading')
-        return redirect(request.url)
     image.save(secure_filename("orignal.jpg"))
     print(image.filename)
     result = test_one_file()
+    if result == "no":
+        return render_template("index.html", data2=result)
     os.remove("orignal.jpg")
     return render_template("index.html", data2=result)
 
 
-@app.route('/display1/')
+@ app.route('/display1/')
 def display1_image():
     return redirect(url_for('static', filename='images/detected1.jpg'))
 
 
-@app.after_request
+@ app.after_request
 def add_header(response):
     """
     Add headers to both force latest IE rendering engine or Chrome Frame,
