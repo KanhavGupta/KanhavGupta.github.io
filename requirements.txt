@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 tensorflow==1.15
+=======
+tensorflow-cpu
+>>>>>>> 260fda48049436f434dbe987d8d20d564bc208be
 pandas
 numpy
 sklearn
 opencv-python
 librosa
+flask
 soundfile
 gunicorn==20.0.4
 Werkzeug==0.16.0

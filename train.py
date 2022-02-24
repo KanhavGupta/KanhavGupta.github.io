@@ -63,20 +63,20 @@ observed_emotions = ['calm', 'happy',  'fearful', 'disgust']
 #     return train_test_split(np.array(x), y, test_size=test_size, random_state=9)
 
 
-def train():
-    x_train, x_test, y_train, y_test = load_data(test_size=0.1)
-    print((x_train.shape[0], x_test.shape[0]))
-    print(f'Features extracted: {x_train.shape[1]}')
-    model = MLPClassifier(batch_size=256, hidden_layer_sizes=(300,), learning_rate='adaptive',
-                          max_iter=1000)
-    # DataFlair - Train the model
-    model.fit(x_train, y_train)
-    pickle.dump(model, open(filename, 'wb'))
-    loaded_model = pickle.load(open(filename, 'rb'))
-    y_pred = loaded_model.predict(x_test)
-    print("Model Trained")
-    acc = accuracy_score(y_true=y_test, y_pred=y_pred)
-    print("Accuracy: {:.2f}%".format(acc * 100))
+# def train():
+#     x_train, x_test, y_train, y_test = load_data(test_size=0.1)
+#     print((x_train.shape[0], x_test.shape[0]))
+#     print(f'Features extracted: {x_train.shape[1]}')
+#     model = MLPClassifier(alpha=0.01, batch_size=256, epsilon=1e-08, hidden_layer_sizes=(300,), learning_rate='adaptive',
+#                           max_iter=1000)
+#     # DataFlair - Train the model
+#     model.fit(x_train, y_train)
+#     pickle.dump(model, open(filename, 'wb'))
+#     loaded_model = pickle.load(open(filename, 'rb'))
+#     y_pred = loaded_model.predict(x_test)
+#     print("Model Trained")
+#     acc = accuracy_score(y_true=y_test, y_pred=y_pred)
+#     print("Accuracy: {:.2f}%".format(acc * 100))
 
 
 # def recorded_test(file):
